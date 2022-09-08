@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tup.simple.models.cargos;
+import tup.simple.models.directores;
 import tup.simple.models.empleados;
 import tup.simple.repositories.empleadosRepository;
 
@@ -31,7 +32,7 @@ public class empleadosController {
 
     @PostMapping("/add") // Map ONLY POST Requests
     public @ResponseBody String addNewEmployee(@RequestParam String nombre, @RequestParam Character sexo,
-    @RequestParam Date fechanac, @RequestParam Date fechaincor,@RequestParam Float salario, @RequestParam Float comision,@RequestParam cargos idcargo, @RequestParam Long jefe,@RequestParam Long codigodepto) {
+    @RequestParam Date fechanac, @RequestParam Date fechaincor,@RequestParam Float salario, @RequestParam Float comision,@RequestParam cargos idcargo, @RequestParam directores jefe,@RequestParam Long codigodepto) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 

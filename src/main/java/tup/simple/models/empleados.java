@@ -1,11 +1,14 @@
 package tup.simple.models;
 
 import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -31,7 +34,9 @@ public class empleados {
     @JoinColumn(name="idcargo")
     private cargos idcargo;
 
-    private Long jefe;
+    @ManyToOne
+    @JoinColumn(name="jefe")
+    private directores jefe;
 
     private Long codigodepto;
 
@@ -99,11 +104,11 @@ public class empleados {
         this.idcargo = idcargo;
     }
 
-    public Long getJefe() {
-        return jefe;
+    public String getJefe() {
+        return jefe.getNombre();
     }
 
-    public void setJefe(Long jefe) {
+    public void setJefe(directores jefe) {
         this.jefe = jefe;
     }
 
