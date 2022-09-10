@@ -1,7 +1,6 @@
 package tup.simple.models;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,15 +29,21 @@ public class empleados {
 
     private Float comision;
 
-    @OneToOne(optional=false)
-    @JoinColumn(name="idcargo")
-    private cargos idcargo;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cargo")
+    private cargos cargo;
 
     @ManyToOne
-    @JoinColumn(name="jefe")
+    @JoinColumn(name = "jefe")
     private directores jefe;
 
-    private Long codigodepto;
+    @ManyToOne
+    @JoinColumn(name = "codigodepto")
+    private departamentos codigodepto;
+
+    @OneToOne
+    @JoinColumn(name = "fichamedica")
+    private fichamedica fichamedica;
 
     public Long getId() {
         return id;
@@ -97,28 +102,35 @@ public class empleados {
     }
 
     public String getCargo() {
-        return idcargo.getCargo();
+        return cargo.getCargo();
     }
 
-    public void setCargo(cargos idcargo) {
-        this.idcargo = idcargo;
+    public void setCargo(cargos cargo) {
+        this.cargo = cargo;
     }
 
     public String getJefe() {
-        return jefe.getNombre();
+        return jefe.getNombre() + ' ' + jefe.getApellido().substring(0,1);
     }
 
     public void setJefe(directores jefe) {
         this.jefe = jefe;
     }
 
-    public Long getCodigodepto() {
-        return codigodepto;
+    public String getCodigodepto() {
+        return codigodepto.getCiudad();
     }
 
-    public void setCodigodepto(Long codigodepto) {
+    public void setCodigodepto(departamentos codigodepto) {
         this.codigodepto = codigodepto;
     }
 
-    
+    public String getFichamedica() {
+        return fichamedica.getObrasoc();
+    }
+
+    public void setFichamedica(fichamedica fichamedica) {
+        this.fichamedica = fichamedica;
+    }
+
 }

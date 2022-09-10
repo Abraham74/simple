@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tup.simple.models.cargos;
+import tup.simple.models.departamentos;
 import tup.simple.models.directores;
 import tup.simple.models.empleados;
+import tup.simple.models.fichamedica;
 import tup.simple.repositories.empleadosRepository;
 
 @Controller // This means that this class is a Controller
@@ -32,7 +34,7 @@ public class empleadosController {
 
     @PostMapping("/add") // Map ONLY POST Requests
     public @ResponseBody String addNewEmployee(@RequestParam String nombre, @RequestParam Character sexo,
-    @RequestParam Date fechanac, @RequestParam Date fechaincor,@RequestParam Float salario, @RequestParam Float comision,@RequestParam cargos idcargo, @RequestParam directores jefe,@RequestParam Long codigodepto) {
+    @RequestParam Date fechanac, @RequestParam Date fechaincor,@RequestParam Float salario, @RequestParam Float comision,@RequestParam cargos idcargo, @RequestParam directores jefe,@RequestParam departamentos codigodepto, @RequestParam fichamedica fichamed) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -46,6 +48,7 @@ public class empleadosController {
         n.setCargo(idcargo);
         n.setJefe(jefe);
         n.setCodigodepto(codigodepto);
+        n.setFichamedica(fichamed);
         _empleadosRepository.save(n);
         return "Saved";
     }
@@ -95,7 +98,8 @@ public class empleadosController {
                 + "<th>Comision</th>"
                 + "<th>Cargo</th>"
                 + "<th>Jefe</th>"
-                + "<th>Codigo depto</th>"
+                + "<th>Codigo departamento</th>"
+                + "<th>Obra Social</th>"
                 + "</tr>";
         // No puedo usar forEach() con una función lambda
         // porque el scope de las variables no lo permite.
@@ -111,6 +115,7 @@ public class empleadosController {
                     + "<td>" + employ.getCargo() + "</td>"
                     + "<td>" + employ.getJefe() + "</td>"
                     + "<td>" + employ.getCodigodepto() + "</td>"
+                    + "<td>" + employ.getFichamedica() + "</td>"
                     + "</tr>";
         }
         return resp + "</table>";
